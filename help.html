@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Help & Support</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f7fb;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1a1a2e;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 440px;
+      height: 100vh;
+      max-height: 760px;
+      background: #fff;
+      border-radius: 0;
+      box-shadow: none;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @media (min-width: 500px) {
+      .container {
+        border-radius: 20px;
+        box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08);
+        height: 90vh;
+      }
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      padding: 1.2rem 1.5rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .header h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .header p {
+      font-size: 0.85rem;
+      opacity: 0.85;
+      margin-top: 0.2rem;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .home-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .home-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .home-btn-sm {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      transition: background 0.2s;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    .home-btn-sm:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Options Screen */
+    .screen {
+      display: none;
+      flex-direction: column;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    .options-body {
+      flex: 1;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow-y: auto;
+    }
+
+    .options-body h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .options-body > p {
+      font-size: 0.9rem;
+      color: #888;
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      padding: 1.1rem 1.2rem;
+      margin-bottom: 0.8rem;
+      background: #f8f9ff;
+      border: 1.5px solid #e8eaff;
+      border-radius: 14px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #1a1a2e;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: left;
+    }
+
+    .option-btn:hover {
+      background: #eef2ff;
+      border-color: #4f46e5;
+      transform: translateX(4px);
+    }
+
+    .option-btn .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .option-btn .icon.withdrawal {
+      background: #fee2e2;
+    }
+
+    .option-btn .icon.account {
+      background: #dbeafe;
+    }
+
+    .option-btn .icon.promotion {
+      background: #d1fae5;
+    }
+
+    .option-btn .arrow {
+      margin-left: auto;
+      color: #bbb;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Chat Screen */
+    .chat-header {
+      background: #4f46e5;
+      padding: 0.8rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .chat-header .back-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+
+    .chat-header .back-btn:hover {
+      opacity: 1;
+    }
+
+    .chat-header .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .chat-header .chat-title {
+      flex: 1;
+    }
+
+    .chat-header .chat-title h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .chat-header .chat-title p {
+      font-size: 0.75rem;
+      opacity: 0.8;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 1.2rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .msg {
+      max-width: 85%;
+      padding: 0.7rem 1rem;
+      border-radius: 14px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      animation: msgIn 0.3s ease;
+    }
+
+    @keyframes msgIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .msg.bot {
+      background: #f0f0f8;
+      color: #1a1a2e;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+
+    .msg.user {
+      background: #4f46e5;
+      color: #fff;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+
+    .typing {
+      display: flex;
+      gap: 5px;
+      padding: 0.6rem 1rem;
+      background: #f0f0f8;
+      border-radius: 14px;
+      border-bottom-left-radius: 4px;
+      align-self: flex-start;
+      max-width: 70px;
+      animation: msgIn 0.3s ease;
+    }
+
+    .typing span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #bbb;
+      animation: typingBounce 1.2s infinite;
+    }
+
+    .typing span:nth-child(2) { animation-delay: 0.2s; }
+    .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-6px); }
+    }
+
+    .chat-input-area {
+      display: flex;
+      gap: 0.6rem;
+      padding: 0.8rem 1rem;
+      border-top: 1px solid #eee;
+      background: #fff;
+      flex-shrink: 0;
+    }
+
+    .chat-input-area input {
+      flex: 1;
+      padding: 0.7rem 1rem;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .chat-input-area input:focus {
+      border-color: #4f46e5;
+    }
+
+    .chat-input-area .send-btn {
+      width: 42px;
+      height: 42px;
+      border: none;
+      background: #4f46e5;
+      color: #fff;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      flex-shrink: 0;
+      display: none;
+    }
+
+    .chat-input-area .send-btn.visible {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-input-area .send-btn:hover {
+      background: #4338ca;
+    }
+
+    .chat-input-area .send-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .chat-input-area .voice-btn.hidden {
+      display: none;
+    }
+
+    .chat-input-area .attach-btn,
+    .chat-input-area .voice-btn {
+      width: 42px;
+      height: 42px;
+      border: none;
+      background: #f0f0f8;
+      color: #666;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .chat-input-area .attach-btn:hover,
+    .chat-input-area .voice-btn:hover {
+      background: #e0e0ff;
+      color: #4f46e5;
+    }
+
+    .chat-input-area .voice-btn.recording {
+      background: #fee2e2;
+      color: #ef4444;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    .msg-image {
+      max-width: min(100%, 480px);
+      max-height: 80vh;
+      border-radius: 12px;
+      cursor: pointer;
+      border: 1px solid #eee;
+    }
+
+    .msg.user .msg-image {
+      border-radius: 12px 12px 4px 4px;
+    }
+
+    .msg-image-caption {
+      padding: 0.35rem 0.5rem 0.25rem 0.5rem;
+      font-size: 0.82rem;
+      color: inherit;
+      line-height: 1.3;
+      word-wrap: break-word;
+      max-width: 210px;
+    }
+
+    .msg-voice {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: #f0f0f8;
+      border-radius: 14px;
+      padding: 0.55rem 1rem 0.55rem 0.7rem;
+      max-width: 230px;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+      animation: msgIn 0.3s ease;
+    }
+
+    .msg-voice .play-btn {
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 50%;
+      background: #4f46e5;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.15s, background 0.2s;
+    }
+
+    .msg-voice .play-btn:hover {
+      background: #4338ca;
+      transform: scale(1.05);
+    }
+
+    .msg-voice .play-btn:active {
+      transform: scale(0.95);
+    }
+
+    .msg-voice .voice-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .msg-voice .voice-info .v-dur {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+
+    .msg-voice .voice-info .v-size {
+      font-size: 0.72rem;
+      color: #999;
+    }
+
+    .msg-voice .v-wave {
+      width: 80px;
+      max-width: 30vw;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .msg-voice.user {
+      background: #eef2ff;
+      border-bottom-right-radius: 4px;
+      border-bottom-left-radius: 14px;
+      align-self: flex-end;
+    }
+
+    .msg-voice.user .play-btn {
+      background: #4f46e5;
+    }
+
+    .msg-voice.user .play-btn:hover {
+      background: #4338ca;
+    }
+
+    /* Fullscreen image viewer */
+    .img-viewer {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: #000;
+      flex-direction: column;
+    }
+
+    .img-viewer.show {
+      display: flex;
+    }
+
+    .img-viewer-top {
+      display: flex;
+      align-items: center;
+      padding: 0.6rem 1rem;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      gap: 0.8rem;
+      flex-shrink: 0;
+      z-index: 2;
+    }
+
+    .img-viewer-top .iv-back {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .img-viewer-top .iv-label {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-left: auto;
+    }
+
+    .img-viewer-body {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    .img-viewer-body img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+      will-change: transform;
+    }
+
+    .img-viewer-body img.zoomed {
+      max-width: none;
+      max-height: none;
+    }
+
+    /* Recording Area - WhatsApp Style */
+    .recording-area {
+      display: none;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 1rem;
+      background: #fff;
+      border-top: 1px solid #e8e8ef;
+      flex-shrink: 0;
+    }
+
+    .recording-area.show {
+      display: flex;
+    }
+
+    .recording-area canvas {
+      flex: 1;
+      height: 40px;
+      max-width: 100%;
+      border-radius: 8px;
+      background: #f5f5fa;
+    }
+
+    .recording-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .recording-info .rec-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ef4444;
+      animation: recPulse 0.6s ease-in-out infinite;
+    }
+
+    @keyframes recPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .recording-info #recTimer {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      min-width: 36px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .rec-stop-btn {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: #ef4444;
+      color: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s;
+    }
+
+    .rec-stop-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .rec-stop-btn:active {
+      transform: scale(0.95);
+    }
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .rec-stop-btn:hover {
+      background: #dc2626;
+    }
+
+    /* Image Editor Modal (WhatsApp-style) */
+    .img-editor {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: #000;
+      flex-direction: column;
+    }
+
+    .img-editor.show {
+      display: flex;
+    }
+
+    .ie-top-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.8rem;
+      background: #1a1a2e;
+      flex-shrink: 0;
+    }
+
+    .ie-top-bar #ieCounter {
+      flex: 1;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .ie-btn {
+      width: 38px;
+      height: 38px;
+      border: none;
+      background: transparent;
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .ie-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .ie-image-area {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      background: #111;
+    }
+
+    .ie-image-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .ie-image-wrap img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      transition: transform 0.2s;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .ie-canvas-overlay {
+      position: absolute;
+      inset: 0;
+      cursor: crosshair;
+      touch-action: none;
+    }
+
+    .ie-bottom-bar {
+      background: #1a1a2e;
+      flex-shrink: 0;
+    }
+
+    .ie-tools {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+      padding: 0.4rem 0.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .ie-tool {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .ie-tool:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .ie-tool.active {
+      background: rgba(99, 102, 241, 0.25);
+      color: #818cf8;
+    }
+
+    .ie-colors {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      z-index: 20;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(6px);
+      padding: 5px 4px;
+      border-radius: 10px;
+      transition: opacity 0.15s;
+    }
+
+    .ie-colors.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .ie-color-btn {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s;
+      padding: 0;
+    }
+
+    .ie-color-btn.active {
+      border-color: #818cf8;
+      transform: scale(1.3);
+      box-shadow: 0 0 0 2px rgba(129, 140, 248, 0.3);
+    }
+
+    .ie-color-btn:hover {
+      transform: scale(1.2);
+    }
+
+    .ie-send-area {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.8rem;
+    }
+
+    .ie-send-area input {
+      flex: 1;
+      padding: 0.65rem 1rem;
+      border: 1.5px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.06);
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: #fff;
+      outline: none;
+    }
+
+    .ie-send-area input::placeholder {
+      color: rgba(255, 255, 255, 0.35);
+    }
+
+    .ie-send-area input:focus {
+      border-color: rgba(99, 102, 241, 0.5);
+    }
+
+    .ie-send-btn {
+      width: 42px;
+      height: 42px;
+      border: none;
+      background: #4f46e5;
+      color: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+
+    .ie-send-btn:hover {
+      background: #4338ca;
+    }
+
+    .ie-tool-divider {
+      width: 1px;
+      height: 24px;
+      background: rgba(255,255,255,0.12);
+      margin: 0 0.2rem;
+    }
+
+    .ie-tool-done {
+      color: #4ade80 !important;
+    }
+
+    .ie-tool-done:hover {
+      background: rgba(74, 222, 128, 0.15) !important;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Category Selection Screen -->
+  <div class="screen active" id="optionsScreen">
+    <div class="header">
+      <div class="header-top">
+        <a href="index.html" class="home-btn" title="Back to Home">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </a>
+        <div>
+          <h1>Help & Support</h1>
+          <p>Select your issue to start a conversation</p>
+        </div>
+      </div>
+    </div>
+    <div class="options-body">
+      <h2>How can we help you?</h2>
+      <p>Choose one of the options below</p>
+
+      <button class="option-btn" data-option="withdrawal">
+        <span class="icon withdrawal">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+            <line x1="1" y1="10" x2="23" y2="10"/>
+            <circle cx="8" cy="14" r="1.5" fill="currentColor"/>
+            <circle cx="16" cy="14" r="1.5" fill="currentColor"/>
+          </svg>
+        </span>
+        <span>Withdrawal Issue</span>
+        <span class="arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </span>
+      </button>
+
+      <button class="option-btn" data-option="account">
+        <span class="icon account">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            <circle cx="12" cy="16" r="1.2" fill="currentColor"/>
+          </svg>
+        </span>
+        <span>Account Issue</span>
+        <span class="arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </span>
+      </button>
+
+      <button class="option-btn" data-option="promotion">
+        <span class="icon promotion">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </span>
+        <span>Promotion / Marketing Help</span>
+        <span class="arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Chat Screen -->
+  <div class="screen" id="chatScreen">
+    <div class="chat-header">
+      <button class="back-btn" id="backBtn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+        </svg>
+      </button>
+      <div class="avatar" id="chatAvatar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+      </div>
+      <div class="chat-title">
+        <h3 id="chatTitle">Support</h3>
+        <p id="chatStatus">Online</p>
+      </div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages"></div>
+
+    <div class="recording-area" id="recordingArea">
+      <canvas id="waveCanvas"></canvas>
+      <div class="recording-info">
+        <span class="rec-dot"></span>
+        <span id="recTimer">0:00</span>
+        <button class="rec-stop-btn" id="recStopBtn" title="Stop recording">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="chat-input-area">
+      <button class="attach-btn" id="attachBtn" title="Send Image">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+      </button>
+      <input type="file" id="imageInput" accept="image/*" hidden />
+      <input type="text" id="chatInput" placeholder="Type your message..." autocomplete="off" />
+      <button class="voice-btn" id="voiceBtn" title="Voice Note">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="8" y1="23" x2="16" y2="23"/>
+        </svg>
+      </button>
+      <button class="send-btn" id="sendBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Fullscreen Image Viewer -->
+<div class="img-viewer" id="imgViewer">
+  <div class="img-viewer-top">
+    <button class="iv-back" id="ivBack">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    </button>
+    <span id="ivTitle">Image</span>
+    <span class="iv-label" id="ivSender">You</span>
+  </div>
+  <div class="img-viewer-body">
+    <img id="ivImage" src="" alt="Full image" />
+  </div>
+</div>
+
+<!-- Image Editor Modal (WhatsApp-style) -->
+<div class="img-editor" id="imgEditor">
+  <div class="ie-top-bar">
+    <button class="ie-btn" id="ieBack" title="Back">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    </button>
+    <span id="ieCounter">1/1</span>
+    <button class="ie-btn" id="ieDeleteImg" title="Remove image">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+    </button>
+  </div>
+
+  <div class="ie-image-area" id="ieImageArea">
+    <div class="ie-image-wrap" id="ieImageWrap">
+      <img id="ieImage" src="" alt="Edit image" />
+    </div>
+    <div class="ie-colors hidden" id="ieColors">
+      <button class="ie-color-btn active" data-color="#ffffff" style="background:#ffffff;border-color:#ffffff"></button>
+      <button class="ie-color-btn" data-color="#000000" style="background:#000000"></button>
+      <button class="ie-color-btn" data-color="#ef4444" style="background:#ef4444"></button>
+      <button class="ie-color-btn" data-color="#f97316" style="background:#f97316"></button>
+      <button class="ie-color-btn" data-color="#eab308" style="background:#eab308"></button>
+      <button class="ie-color-btn" data-color="#22c55e" style="background:#22c55e"></button>
+      <button class="ie-color-btn" data-color="#3b82f6" style="background:#3b82f6"></button>
+      <button class="ie-color-btn" data-color="#a855f7" style="background:#a855f7"></button>
+      <button class="ie-color-btn" data-color="#ec4899" style="background:#ec4899"></button>
+    </div>
+  </div>
+
+  <div class="ie-bottom-bar">
+    <div class="ie-tools">
+      <button class="ie-tool" id="ieToolArrow" title="Arrow">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="12 5 19 5 19 12"/></svg>
+      </button>
+      <button class="ie-tool" id="ieToolUndo" title="Undo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+      </button>
+      <div class="ie-tool-divider"></div>
+      <button class="ie-tool ie-tool-done" id="ieToolDone">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>
+    </div>
+    <div class="ie-send-area">
+      <input type="text" id="ieCaption" placeholder="Add a caption..." autocomplete="off" />
+      <button class="ie-send-btn" id="ieSendBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    const optionsScreen = document.getElementById('optionsScreen');
+    const chatScreen = document.getElementById('chatScreen');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const backBtn = document.getElementById('backBtn');
+    const chatTitle = document.getElementById('chatTitle');
+    const chatAvatar = document.getElementById('chatAvatar');
+
+    let currentOption = null;
+    let isBotResponding = false;
+
+    // --- Chat flows per option ---
+    const flows = {
+      withdrawal: {
+        title: 'Withdrawal Issue',
+        avatar: '💳',
+        steps: [
+          { role: 'bot', text: 'Hi! I can help you with withdrawal issues. Please tell me what\'s going on:' },
+          { role: 'bot', text: 'Please describe your issue in detail so I can help you better.' },
+        ],
+      },
+      account: {
+        title: 'Account Issue',
+        avatar: '🔒',
+        steps: [
+          { role: 'bot', text: 'Hi! Let\'s fix your account issue. What seems to be the problem?' },
+          { role: 'bot', text: 'Please describe your account issue and I\'ll be happy to help.' },
+        ],
+      },
+      promotion: {
+        title: 'Promotion & Marketing',
+        avatar: '📈',
+        steps: [
+          { role: 'bot', text: 'Great! Let\'s grow your reach. What kind of promotion help do you need?' },
+          { role: 'bot', text: 'Tell me what you\'re looking for and I\'ll help you find the best approach.' },
+        ],
+      },
+    };
+
+    // --- Switch to chat ---
+    function openChat(optionKey) {
+      currentOption = optionKey;
+      const flow = flows[optionKey];
+      chatTitle.textContent = flow.title;
+      chatAvatar.textContent = flow.avatar;
+      chatMessages.innerHTML = '';
+
+      optionsScreen.classList.remove('active');
+      chatScreen.classList.add('active');
+
+      // Send initial bot messages with delay
+      let delay = 0;
+      flow.steps.forEach((msg) => {
+        delay += 600;
+        setTimeout(() => addBotMessage(msg), delay);
+      });
+
+      setTimeout(() => {
+        chatInput.focus();
+      }, delay + 100);
+    }
+
+    // --- Back to options ---
+    function goBack() {
+      chatScreen.classList.remove('active');
+      optionsScreen.classList.add('active');
+      chatMessages.innerHTML = '';
+      currentOption = null;
+      isBotResponding = false;
+      closeEditor();
+      // Stop recording if active
+      if (isRecording) stopRecording();
+    }
+
+    // --- Add bot message ---
+    function addBotMessage(msg) {
+      const div = document.createElement('div');
+      div.className = 'msg bot';
+      div.textContent = msg.text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // --- Add user message ---
+    function addUserMessage(text) {
+      const div = document.createElement('div');
+      div.className = 'msg user';
+      div.textContent = text;
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // --- Show typing indicator ---
+    function showTyping() {
+      const div = document.createElement('div');
+      div.className = 'typing';
+      div.id = 'typingIndicator';
+      div.innerHTML = '<span></span><span></span><span></span>';
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function hideTyping() {
+      const el = document.getElementById('typingIndicator');
+      if (el) el.remove();
+    }
+
+    // --- Send text message ---
+    function sendMessage() {
+      const text = chatInput.value.trim();
+      if (!text || isBotResponding) return;
+
+      addUserMessage(text);
+      chatInput.value = '';
+      isBotResponding = true;
+
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        addBotMessage({
+          role: 'bot',
+          text: 'Thanks for your message! Our team will review this and get back to you shortly. If it\'s urgent, please use our helpline number.',
+        });
+        isBotResponding = false;
+      }, 1200);
+    }
+
+    function addImageMessage(file, role, caption) {
+      role = role || 'user';
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const div = document.createElement('div');
+          div.className = 'msg ' + role;
+          div.style.padding = '4px';
+          div.style.background = 'transparent';
+          div.style.alignSelf = role === 'user' ? 'flex-end' : 'flex-start';
+          div.style.textAlign = 'center';
+          const img = document.createElement('img');
+          img.className = 'msg-image';
+          img.style.display = 'inline-block';
+          img.src = e.target.result;
+          img.alt = 'Sent image';
+          img.dataset.role = role;
+          img.addEventListener('click', () => openImageViewer(e.target.result, role));
+          div.appendChild(img);
+          if (caption) {
+            const cap = document.createElement('div');
+            cap.className = 'msg-image-caption';
+            cap.textContent = caption;
+            div.appendChild(cap);
+          }
+          chatMessages.appendChild(div);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+          resolve();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    let viewerImages = [];
+    let viewerIndex = 0;
+    let viewerScale = 1;
+    let viewerTx = 0;
+    let viewerTy = 0;
+    let viewerTouchStartX = 0;
+    let viewerTouchStartY = 0;
+    let viewerStartTx = 0;
+    let viewerStartTy = 0;
+    let viewerStartScale = 1;
+    let viewerPinchDist = 0;
+    let viewerPinchCenterX = 0;
+    let viewerPinchCenterY = 0;
+    let viewerSwiping = false;
+    let viewerSwipeStartX = 0;
+    let viewerLastTap = 0;
+    const viewerBody = document.querySelector('.img-viewer-body');
+
+    function openImageViewer(src, role) {
+      viewerImages = Array.from(document.querySelectorAll('.msg-image')).map(img => ({ src: img.src, role: img.dataset.role }));
+      viewerIndex = viewerImages.findIndex(i => i.src === src);
+      if (viewerIndex < 0) viewerIndex = 0;
+      viewerScale = 1; viewerTx = 0; viewerTy = 0;
+      showViewerImage();
+      document.getElementById('imgViewer').classList.add('show');
+    }
+
+    function clampPan() {
+      const img = document.getElementById('ivImage');
+      const cw = viewerBody.clientWidth;
+      const ch = viewerBody.clientHeight;
+      const nw = img.naturalWidth || cw;
+      const nh = img.naturalHeight || ch;
+      const dispW = nw * viewerScale;
+      const dispH = nh * viewerScale;
+      const maxTx = Math.max(0, (dispW - cw) / 2);
+      const maxTy = Math.max(0, (dispH - ch) / 2);
+      viewerTx = Math.max(-maxTx, Math.min(maxTx, viewerTx));
+      viewerTy = Math.max(-maxTy, Math.min(maxTy, viewerTy));
+    }
+
+    function applyViewerTransform() {
+      const img = document.getElementById('ivImage');
+      img.classList.toggle('zoomed', viewerScale > 1);
+      if (viewerScale > 1) clampPan(); else { viewerTx = 0; viewerTy = 0; }
+      img.style.transform = `translate(calc(-50% + ${viewerTx}px), calc(-50% + ${viewerTy}px)) scale(${viewerScale})`;
+    }
+
+    function showViewerImage() {
+      const img = document.getElementById('ivImage');
+      if (viewerImages[viewerIndex]) {
+        img.src = viewerImages[viewerIndex].src;
+        viewerScale = 1; viewerTx = 0; viewerTy = 0;
+        img.style.transform = 'translate(-50%, -50%) scale(1)';
+        img.classList.remove('zoomed');
+        document.getElementById('ivTitle').textContent = `Image ${viewerIndex + 1}/${viewerImages.length}`;
+        document.getElementById('ivSender').textContent = viewerImages[viewerIndex].role === 'user' ? 'You' : 'Support';
+      }
+    }
+
+    viewerBody.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        viewerTouchStartX = e.touches[0].clientX;
+        viewerTouchStartY = e.touches[0].clientY;
+        viewerStartTx = viewerTx;
+        viewerStartTy = viewerTy;
+        viewerStartScale = viewerScale;
+        viewerSwipeStartX = e.touches[0].clientX;
+        viewerSwiping = viewerScale <= 1;
+      } else if (e.touches.length === 2) {
+        viewerPinchDist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        viewerStartScale = viewerScale;
+        viewerStartTx = viewerTx;
+        viewerStartTy = viewerTy;
+        viewerPinchCenterX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+        viewerPinchCenterY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      }
+    }, { passive: true });
+
+    viewerBody.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const rect = viewerBody.getBoundingClientRect();
+        const pinchRelX = viewerPinchCenterX - rect.left - rect.width / 2;
+        const pinchRelY = viewerPinchCenterY - rect.top - rect.height / 2;
+        const dist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        const newScale = Math.max(0.5, Math.min(5, viewerStartScale * (dist / viewerPinchDist)));
+        const actualRatio = newScale / viewerStartScale;
+        viewerTx = pinchRelX * (1 - actualRatio) + viewerStartTx * actualRatio;
+        viewerTy = pinchRelY * (1 - actualRatio) + viewerStartTy * actualRatio;
+        viewerScale = newScale;
+        applyViewerTransform();
+      } else if (e.touches.length === 1 && viewerScale > 1) {
+        e.preventDefault();
+        viewerTx = viewerStartTx + (e.touches[0].clientX - viewerTouchStartX);
+        viewerTy = viewerStartTy + (e.touches[0].clientY - viewerTouchStartY);
+        applyViewerTransform();
+      } else if (e.touches.length === 1 && viewerScale <= 1 && viewerSwiping) {
+        e.preventDefault();
+        const dx = e.touches[0].clientX - viewerSwipeStartX;
+        document.getElementById('ivImage').style.transform = `translate(calc(-50% + ${dx * 0.3}px), -50%) scale(1)`;
+      }
+    }, { passive: false });
+
+    viewerBody.addEventListener('touchend', (e) => {
+      if (e.touches.length === 1) {
+        viewerTouchStartX = e.touches[0].clientX;
+        viewerTouchStartY = e.touches[0].clientY;
+        viewerStartTx = viewerTx;
+        viewerStartTy = viewerTy;
+        viewerStartScale = viewerScale;
+      }
+      if (e.changedTouches.length === 1 && viewerScale <= 1) {
+        const dx = e.changedTouches[0].clientX - viewerSwipeStartX;
+        if (Math.abs(dx) > 50) {
+          if (dx > 0 && viewerIndex > 0) { viewerIndex--; showViewerImage(); }
+          else if (dx < 0 && viewerIndex < viewerImages.length - 1) { viewerIndex++; showViewerImage(); }
+          else { applyViewerTransform(); }
+        } else {
+          applyViewerTransform();
+        }
+      }
+      if (e.changedTouches.length === 1) {
+        const now = Date.now();
+        if (now - viewerLastTap < 300 && now - viewerLastTap > 50) {
+          if (viewerScale > 1.5) { viewerScale = 1; viewerTx = 0; viewerTy = 0; }
+          else {
+            const rect = viewerBody.getBoundingClientRect();
+            const tapRelX = e.changedTouches[0].clientX - rect.left - rect.width / 2;
+            const tapRelY = e.changedTouches[0].clientY - rect.top - rect.height / 2;
+            const tapRatio = 3 / viewerScale;
+            viewerTx = tapRelX * (1 - tapRatio) + viewerTx * tapRatio;
+            viewerTy = tapRelY * (1 - tapRatio) + viewerTy * tapRatio;
+            viewerScale = 3;
+          }
+          applyViewerTransform();
+          viewerLastTap = 0;
+          return;
+        }
+        viewerLastTap = now;
+      }
+    }, { passive: true });
+
+    // Mouse wheel zoom — centered on cursor
+    viewerBody.addEventListener('wheel', (e) => {
+      if (!document.getElementById('imgViewer').classList.contains('show')) return;
+      e.preventDefault();
+      const rect = viewerBody.getBoundingClientRect();
+      const mouseRelX = e.clientX - rect.left - rect.width / 2;
+      const mouseRelY = e.clientY - rect.top - rect.height / 2;
+      const ratio = e.deltaY > 0 ? 0.9 : 1.1;
+      const newScale = Math.max(0.5, Math.min(5, viewerScale * ratio));
+      const actualRatio = newScale / viewerScale;
+      viewerTx = mouseRelX * (1 - actualRatio) + viewerTx * actualRatio;
+      viewerTy = mouseRelY * (1 - actualRatio) + viewerTy * actualRatio;
+      viewerScale = newScale;
+      applyViewerTransform();
+    }, { passive: false });
+
+    // Mouse drag pan
+    let viewerMouseDown = false, viewerMouseStartX = 0, viewerMouseStartY = 0, viewerMouseTx = 0, viewerMouseTy = 0;
+    viewerBody.addEventListener('mousedown', (e) => {
+      if (!document.getElementById('imgViewer').classList.contains('show')) return;
+      viewerMouseDown = true;
+      viewerMouseStartX = e.clientX;
+      viewerMouseStartY = e.clientY;
+      viewerMouseTx = viewerTx;
+      viewerMouseTy = viewerTy;
+    });
+    document.addEventListener('mousemove', (e) => {
+      if (!viewerMouseDown) return;
+      if (viewerScale > 1) {
+        viewerTx = viewerMouseTx + (e.clientX - viewerMouseStartX);
+        viewerTy = viewerMouseTy + (e.clientY - viewerMouseStartY);
+        applyViewerTransform();
+      }
+    });
+    document.addEventListener('mouseup', () => { viewerMouseDown = false; });
+
+    document.getElementById('ivBack').addEventListener('click', closeImageViewer);
+    document.addEventListener('keydown', (e) => {
+      if (!document.getElementById('imgViewer').classList.contains('show')) return;
+      if (e.key === 'Escape') closeImageViewer();
+      if (e.key === 'ArrowLeft' && viewerIndex > 0) { viewerIndex--; showViewerImage(); }
+      if (e.key === 'ArrowRight' && viewerIndex < viewerImages.length - 1) { viewerIndex++; showViewerImage(); }
+    });
+    function closeImageViewer() {
+      document.getElementById('imgViewer').classList.remove('show');
+      viewerScale = 1; viewerTx = 0; viewerTy = 0;
+    }
+
+    // --- WhatsApp-style Image Editor ---
+    const imageInput = document.getElementById('imageInput');
+    const attachBtn = document.getElementById('attachBtn');
+    const imgEditor = document.getElementById('imgEditor');
+    const ieImage = document.getElementById('ieImage');
+    const ieImageWrap = document.getElementById('ieImageWrap');
+    const ieImageArea = document.getElementById('ieImageArea');
+    const ieCounter = document.getElementById('ieCounter');
+    const ieCaption = document.getElementById('ieCaption');
+    const ieSendBtn = document.getElementById('ieSendBtn');
+    const ieColorBtns = document.querySelectorAll('.ie-color-btn');
+    let editImages = [];
+    let editIndex = 0;
+    let editMode = 'none';
+    let editCanvas = null;
+    let editCtx = null;
+    let editUndoStack = [];
+    let editRedoStack = [];
+    let imageCaptions = [];
+    let imageDrawings = []; // per-image drawing layer snapshots
+    let editColor = '#ffffff';
+    let arrowObjects = []; // per-image array of {x1,y1,x2,y2,color}
+    let isDrawingArrow = false;
+    let arrowStart = null;
+
+    attachBtn.addEventListener('click', () => imageInput.click());
+
+    imageInput.addEventListener('change', (e) => {
+      const files = Array.from(e.target.files);
+      editImages = files;
+      editIndex = 0;
+      imageCaptions = files.map(() => '');
+      imageDrawings = files.map(() => null);
+      arrowObjects = files.map(() => []);
+      imageInput.value = '';
+      if (editImages.length > 0) openEditor();
+    });
+
+    document.getElementById('ieBack').addEventListener('click', closeEditor);
+    document.getElementById('ieDeleteImg').addEventListener('click', () => {
+      editImages.splice(editIndex, 1);
+      imageCaptions.splice(editIndex, 1);
+      imageDrawings.splice(editIndex, 1);
+      arrowObjects.splice(editIndex, 1);
+      if (editImages.length === 0) { closeEditor(); return; }
+      if (editIndex >= editImages.length) editIndex = editImages.length - 1;
+      loadEditImage(editIndex);
+    });
+
+    function openEditor() {
+      imgEditor.classList.add('show');
+      setMode('none');
+      editUndoStack = [];
+      document.getElementById('ieColors').classList.add('hidden');
+      loadEditImage(editIndex);
+    }
+
+    function closeEditor() {
+      imgEditor.classList.remove('show');
+      editImages = [];
+      editIndex = 0;
+      imageCaptions = [];
+      imageDrawings = [];
+      arrowObjects = [];
+      document.getElementById('ieColors').classList.add('hidden');
+      if (editCanvas) { editCanvas.remove(); editCanvas = null; editCtx = null; }
+    }
+
+    function loadEditImage(index) {
+      const file = editImages[index];
+      if (!file) return;
+      // Save current drawing before switching
+      if (drawLayer && editIndex < imageDrawings.length) {
+        imageDrawings[editIndex] = drawLayer.getContext('2d').getImageData(0, 0, drawLayer.width, drawLayer.height);
+      }
+      imageCaptions[editIndex] = ieCaption.value;
+      editIndex = index;
+      ieCaption.value = imageCaptions[index] || '';
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        ieImage.src = e.target.result;
+        ieImage.style.transform = '';
+        ieCounter.textContent = `${index + 1}/${editImages.length}`;
+        ieImage.onload = () => {
+          setupEditCanvas();
+          // Restore this image's drawing
+          if (imageDrawings[editIndex]) {
+            const dc = drawLayer.getContext('2d');
+            dc.putImageData(imageDrawings[editIndex], 0, 0);
+          } else {
+            const dc = drawLayer.getContext('2d');
+            dc.clearRect(0, 0, drawLayer.width, drawLayer.height);
+          }
+          redrawScene();
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function setMode(mode) {
+      editMode = mode;
+      document.getElementById('ieToolArrow').classList.toggle('active', mode === 'arrow');
+      document.getElementById('ieColors').classList.toggle('hidden', mode !== 'arrow');
+      if (editCanvas) editCanvas.style.cursor = mode === 'arrow' ? 'crosshair' : 'default';
+      if (mode !== 'arrow') redrawScene();
+    }
+
+    function setupEditCanvas() {
+      const old = document.querySelector('.ie-canvas-overlay');
+      if (old) old.remove();
+      editCanvas = document.createElement('canvas');
+      editCanvas.className = 'ie-canvas-overlay';
+      const rect = ieImageArea.getBoundingClientRect();
+      editCanvas.width = rect.width;
+      editCanvas.height = rect.height;
+      editCtx = editCanvas.getContext('2d');
+      ieImageWrap.appendChild(editCanvas);
+      // Init drawLayer — preserve existing content if size matches
+      if (!drawLayer) drawLayer = document.createElement('canvas');
+      if (drawLayer.width !== editCanvas.width || drawLayer.height !== editCanvas.height) {
+        const oldContent = document.createElement('canvas');
+        oldContent.width = drawLayer.width; oldContent.height = drawLayer.height;
+        oldContent.getContext('2d').drawImage(drawLayer, 0, 0);
+        drawLayer.width = editCanvas.width;
+        drawLayer.height = editCanvas.height;
+        drawLayer.getContext('2d').drawImage(oldContent, 0, 0);
+      }
+
+      // Swipe images
+      let touchStartX = 0;
+      editCanvas.addEventListener('touchstart', (e) => {
+        if (editMode !== 'none') return;
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      editCanvas.addEventListener('touchend', (e) => {
+        if (editMode !== 'none') return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) {
+          imageCaptions[editIndex] = ieCaption.value;
+          // Save current drawing before switching
+          if (drawLayer) imageDrawings[editIndex] = drawLayer.getContext('2d').getImageData(0, 0, drawLayer.width, drawLayer.height);
+          if (dx > 0 && editIndex > 0) { editIndex--; loadEditImage(editIndex); }
+          else if (dx < 0 && editIndex < editImages.length - 1) { editIndex++; loadEditImage(editIndex); }
+        }
+      }, { passive: true });
+
+      // Mouse events
+      editCanvas.addEventListener('mousedown', (e) => {
+        const p = getEditPos(e);
+        if (editMode === 'arrow') { startArrow(p); return; }
+      });
+      editCanvas.addEventListener('mousemove', (e) => {
+        const p = getEditPos(e);
+        if (isDrawingArrow && editMode === 'arrow') { doArrow(p); return; }
+      });
+      const endAll = () => { endArrow(); };
+      editCanvas.addEventListener('mouseup', endAll);
+      editCanvas.addEventListener('mouseleave', endAll);
+
+      // Touch events
+      editCanvas.addEventListener('touchstart', (e) => {
+        if (editMode === 'none') return;
+        if (!e.cancelable) return;
+        e.preventDefault();
+        const p = getEditPos(e);
+        if (editMode === 'arrow') { startArrow(p); return; }
+      }, { passive: false });
+      editCanvas.addEventListener('touchmove', (e) => {
+        if (editMode === 'none') return;
+        if (!e.cancelable) return;
+        e.preventDefault();
+        const p = getEditPos(e);
+        if (isDrawingArrow && editMode === 'arrow') { doArrow(p); return; }
+      }, { passive: false });
+      editCanvas.addEventListener('touchend', () => { endArrow(); });
+
+      const ro = new ResizeObserver(() => {
+        const r = ieImageArea.getBoundingClientRect();
+        if (editCanvas) {
+          // Resize drawLayer
+          if (drawLayer) {
+            const tmp = document.createElement('canvas');
+            tmp.width = drawLayer.width; tmp.height = drawLayer.height;
+            tmp.getContext('2d').drawImage(drawLayer, 0, 0);
+            drawLayer.width = r.width; drawLayer.height = r.height;
+            drawLayer.getContext('2d').drawImage(tmp, 0, 0);
+          }
+          editCanvas.width = r.width; editCanvas.height = r.height;
+          redrawScene();
+        }
+      });
+      ro.observe(ieImageArea);
+    }
+
+    // --- Draw ---
+    let drawLayer = null; // offscreen canvas for drawing strokes only
+
+    function initDrawLayer() {
+      if (!drawLayer) drawLayer = document.createElement('canvas');
+      if (editCanvas && (drawLayer.width !== editCanvas.width || drawLayer.height !== editCanvas.height)) {
+        const tmp = document.createElement('canvas');
+        tmp.width = drawLayer.width; tmp.height = drawLayer.height;
+        tmp.getContext('2d').drawImage(drawLayer, 0, 0);
+        drawLayer.width = editCanvas.width;
+        drawLayer.height = editCanvas.height;
+        drawLayer.getContext('2d').drawImage(tmp, 0, 0);
+      }
+    }
+
+    function saveUndoState() {
+      if (!editCanvas) return;
+      initDrawLayer();
+      const entry = {
+        drawData: drawLayer.getContext('2d').getImageData(0, 0, drawLayer.width, drawLayer.height),
+        arrows: JSON.parse(JSON.stringify(arrowObjects[editIndex] || []))
+      };
+      editUndoStack.push(entry);
+      if (editUndoStack.length > 20) editUndoStack.shift();
+    }
+
+    function redrawScene() {
+      if (!editCtx || !editCanvas || !drawLayer) return;
+      editCtx.clearRect(0, 0, editCanvas.width, editCanvas.height);
+      editCtx.drawImage(drawLayer, 0, 0);
+      // Draw committed arrows
+      const arrows = arrowObjects[editIndex] || [];
+      arrows.forEach(a => {
+        drawArrowOnCtx(editCtx, a.x1, a.y1, a.x2, a.y2, a.color);
+      });
+    }
+
+
+    // --- Arrow (WhatsApp-style) ---
+    let arrowEnd = null;
+    function startArrow(p) {
+      isDrawingArrow = true;
+      arrowStart = { x: p.x, y: p.y };
+      arrowEnd = { x: p.x, y: p.y };
+    }
+    function doArrow(p) {
+      if (!isDrawingArrow) return;
+      arrowEnd = { x: p.x, y: p.y };
+      redrawScene();
+      drawArrowOnCtx(editCtx, arrowStart.x, arrowStart.y, arrowEnd.x, arrowEnd.y, editColor);
+    }
+    function endArrow() {
+      if (!isDrawingArrow) return;
+      isDrawingArrow = false;
+      if (arrowStart && arrowEnd) {
+        const dx = arrowEnd.x - arrowStart.x, dy = arrowEnd.y - arrowStart.y;
+        const len = Math.sqrt(dx * dx + dy * dy);
+        if (len > 10) {
+          saveUndoState();
+          arrowObjects[editIndex].push({ x1: arrowStart.x, y1: arrowStart.y, x2: arrowEnd.x, y2: arrowEnd.y, color: editColor });
+        }
+      }
+      arrowStart = null;
+      arrowEnd = null;
+      redrawScene();
+    }
+    function drawArrowOnCtx(ctx, x1, y1, x2, y2, color) {
+      const dx = x2 - x1, dy = y2 - y1;
+      const len = Math.sqrt(dx * dx + dy * dy);
+      if (len < 1) return;
+      const angle = Math.atan2(dy, dx);
+      const headLen = Math.min(16, len * 0.35);
+      ctx.save();
+      ctx.strokeStyle = color;
+      ctx.fillStyle = color;
+      ctx.lineWidth = 4;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+      // Arrowhead
+      ctx.beginPath();
+      ctx.moveTo(x2, y2);
+      ctx.lineTo(x2 - headLen * Math.cos(angle - 0.45), y2 - headLen * Math.sin(angle - 0.45));
+      ctx.lineTo(x2 - headLen * Math.cos(angle + 0.45), y2 - headLen * Math.sin(angle + 0.45));
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+    // Color buttons
+    ieColorBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        ieColorBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        editColor = btn.dataset.color;
+      });
+    });
+
+    // --- Common ---
+    function getImageBounds() {
+      const areaRect = ieImageArea.getBoundingClientRect();
+      const imgRect = ieImage.getBoundingClientRect();
+      return {
+        x: Math.max(0, imgRect.left - areaRect.left),
+        y: Math.max(0, imgRect.top - areaRect.top),
+        w: Math.min(areaRect.width, imgRect.width),
+        h: Math.min(areaRect.height, imgRect.height)
+      };
+    }
+
+    function wrapText(text, maxChars) {
+      const words = text.split(' ');
+      const lines = [];
+      let current = '';
+      for (const w of words) {
+        if ((current + ' ' + w).trim().length <= maxChars) {
+          current = (current + ' ' + w).trim();
+        } else {
+          if (current) lines.push(current);
+          current = w;
+          if (current.length > maxChars) {
+            while (current.length > maxChars) {
+              lines.push(current.slice(0, maxChars));
+              current = current.slice(maxChars);
+            }
+          }
+        }
+      }
+      if (current) lines.push(current);
+      return lines.slice(0, 5);
+    }
+
+    function getEditPos(e) {
+      const rect = editCanvas.getBoundingClientRect();
+      const t = e.touches ? e.touches[0] || e.changedTouches[0] : e;
+      let x = t.clientX - rect.left;
+      let y = t.clientY - rect.top;
+      if (editMode === 'arrow') {
+        const b = getImageBounds();
+        x = Math.max(b.x, Math.min(b.x + b.w, x));
+        y = Math.max(b.y, Math.min(b.y + b.h, y));
+      }
+      return { x, y };
+    }
+
+    // --- Tool buttons ---
+    document.getElementById('ieToolArrow').addEventListener('click', () => { setMode(editMode === 'arrow' ? 'none' : 'arrow'); });
+
+    // Undo handler
+    document.getElementById('ieToolUndo').addEventListener('click', () => {
+      if (editUndoStack.length === 0 || !editCanvas) return;
+      const state = editUndoStack.pop();
+      // Restore draw layer
+      const dc = drawLayer.getContext('2d');
+      dc.putImageData(state.drawData, 0, 0);
+      // Restore arrows
+      arrowObjects[editIndex] = state.arrows || [];
+      redrawScene();
+    });
+
+    // Done button — applies current tool action
+    document.getElementById('ieToolDone').addEventListener('click', () => {
+      if (editMode === 'arrow') setMode('none');
+      else setMode('none');
+    });
+
+    function renderEditedImage(index) {
+      return new Promise((resolve, reject) => {
+        const file = editImages[index];
+        if (!file) return reject(new Error('No file'));
+        const img = new Image();
+        img.onload = () => {
+          const origW = img.naturalWidth, origH = img.naturalHeight;
+          const areaRect = ieImageArea.getBoundingClientRect();
+          const imgRect = ieImage.getBoundingClientRect();
+          const offsetX = imgRect.left - areaRect.left;
+          const offsetY = imgRect.top - areaRect.top;
+          const dispW = imgRect.width, dispH = imgRect.height;
+          const scaleX = origW / dispW, scaleY = origH / dispH;
+          const c = document.createElement('canvas');
+          c.width = origW;
+          c.height = origH;
+          const ctx = c.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          if (drawLayer) {
+            ctx.save();
+            ctx.translate(-offsetX * scaleX, -offsetY * scaleY);
+            ctx.scale(scaleX, scaleY);
+            ctx.drawImage(drawLayer, 0, 0);
+            ctx.restore();
+          }
+          // Draw arrows
+          const arrows = arrowObjects[index] || [];
+          arrows.forEach(a => {
+            const ax1 = (a.x1 - offsetX) * scaleX, ay1 = (a.y1 - offsetY) * scaleY;
+            const ax2 = (a.x2 - offsetX) * scaleX, ay2 = (a.y2 - offsetY) * scaleY;
+            const dx = ax2 - ax1, dy = ay2 - ay1;
+            const len = Math.sqrt(dx * dx + dy * dy);
+            if (len < 1) return;
+            const angle = Math.atan2(dy, dx);
+            const headLen = Math.min(16 * scaleX, len * 0.35);
+            ctx.save();
+            ctx.strokeStyle = a.color;
+            ctx.fillStyle = a.color;
+            ctx.lineWidth = 4 * scaleX;
+            ctx.lineCap = 'round';
+            ctx.beginPath();
+            ctx.moveTo(ax1, ay1);
+            ctx.lineTo(ax2, ay2);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(ax2, ay2);
+            ctx.lineTo(ax2 - headLen * Math.cos(angle - 0.45), ay2 - headLen * Math.sin(angle - 0.45));
+            ctx.lineTo(ax2 - headLen * Math.cos(angle + 0.45), ay2 - headLen * Math.sin(angle + 0.45));
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+          });
+          c.toBlob((blob) => resolve(blob), 'image/jpeg', 0.9);
+        };
+        img.onerror = reject;
+        img.src = URL.createObjectURL(file);
+      });
+    }
+
+    function compressImage(file) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let w = img.width, h = img.height;
+          const maxDim = 1920;
+          if (w > maxDim || h > maxDim) {
+            const ratio = Math.min(maxDim / w, maxDim / h);
+            w = Math.round(w * ratio);
+            h = Math.round(h * ratio);
+          }
+          canvas.width = w;
+          canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          canvas.toBlob((blob) => {
+            if (!blob) return reject(new Error('Canvas to blob failed'));
+            resolve(new File([blob], file.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' }));
+          }, 'image/jpeg', 0.85);
+        };
+        img.onerror = reject;
+        img.src = URL.createObjectURL(file);
+      });
+    }
+
+    // Send — image with caption
+    ieSendBtn.addEventListener('click', async () => {
+      const caption = ieCaption.value.trim();
+      try {
+        const blob = await renderEditedImage(editIndex);
+        if (!blob) throw new Error('renderEditedImage returned no blob');
+        const name = editImages[editIndex] ? editImages[editIndex].name.replace(/\.[^.]+$/, '.jpg') : 'image.jpg';
+        const file = new File([blob], name, { type: 'image/jpeg' });
+        const compressed = await compressImage(file);
+        await addImageMessage(compressed, 'user');
+        if (caption) {
+          addUserMessage(caption);
+        }
+      } catch (e) {
+        console.error('Image send failed', e);
+      }
+      closeEditor();
+      isBotResponding = true; showTyping();
+      setTimeout(() => { hideTyping(); addBotMessage({ role: 'bot', text: 'Thanks for the screenshot! Our team will review it and get back to you shortly.' }); isBotResponding = false; }, 1200);
+    });
+    // --- Voice recording with waveform ---
+    const voiceBtn = document.getElementById('voiceBtn');
+    const recordingArea = document.getElementById('recordingArea');
+    const recStopBtn = document.getElementById('recStopBtn');
+    const recTimer = document.getElementById('recTimer');
+    const waveCanvas = document.getElementById('waveCanvas');
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let isRecording = false;
+    let audioStream = null;
+    let analyserNode = null;
+    let animationId = null;
+    let recStartTime = null;
+    let recTimerInterval = null;
+
+    voiceBtn.addEventListener('click', async () => {
+      if (isRecording) {
+        stopRecording();
+        return;
+      }
+
+      try {
+        audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        startRecording(audioStream);
+      } catch (err) {
+        alert('Microphone access is required to record voice notes. Please allow microphone permissions.');
+        console.error(err);
+      }
+    });
+
+    recStopBtn.addEventListener('click', stopRecording);
+
+    function startRecording(stream) {
+      isRecording = true;
+      audioChunks = [];
+      voiceBtn.classList.add('recording');
+      recordingArea.classList.add('show');
+      recStartTime = Date.now();
+      recTimer.textContent = '0:00';
+
+      // Start timer
+      recTimerInterval = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - recStartTime) / 1000);
+        recTimer.textContent = formatDuration(elapsed);
+      }, 200);
+
+      // Set up audio context & analyser for waveform
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const source = audioCtx.createMediaStreamSource(stream);
+      analyserNode = audioCtx.createAnalyser();
+      analyserNode.fftSize = 128;
+      source.connect(analyserNode);
+      // Size wave canvas to fit container
+      waveCanvas.width = waveCanvas.clientWidth || 320;
+      waveCanvas.height = 60;
+      drawWaveform();
+
+      mediaRecorder = new MediaRecorder(stream, { mimeType: MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4' });
+
+      mediaRecorder.ondataavailable = (e) => {
+        if (e.data.size > 0) audioChunks.push(e.data);
+      };
+
+      mediaRecorder.onstop = () => {
+        voiceBtn.classList.remove('recording');
+        recordingArea.classList.remove('show');
+        clearInterval(recTimerInterval);
+        cancelAnimationFrame(animationId);
+
+        if (audioCtx.state !== 'closed') audioCtx.close();
+
+        const blob = new Blob(audioChunks, { type: mediaRecorder.mimeType });
+        if (blob.size > 0) {
+          const audioUrl = URL.createObjectURL(blob);
+          addVoiceMessage(audioUrl, blob.size);
+        }
+        stream.getTracks().forEach(t => t.stop());
+        audioStream = null;
+      };
+
+      mediaRecorder.start();
+
+      setTimeout(() => {
+        if (isRecording) stopRecording();
+      }, 60000);
+    }
+
+    function stopRecording() {
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+        mediaRecorder.stop();
+      }
+      isRecording = false;
+    }
+
+    function drawWaveform() {
+      const ctx = waveCanvas.getContext('2d');
+      const bufferLength = analyserNode.frequencyBinCount;
+      const dataArray = new Uint8Array(bufferLength);
+      const W = waveCanvas.width;
+      const H = waveCanvas.height;
+      const barCount = 48;
+      const barSpacing = 3;
+
+      function draw() {
+        animationId = requestAnimationFrame(draw);
+        analyserNode.getByteTimeDomainData(dataArray);
+
+        ctx.clearRect(0, 0, W, H);
+
+        const barWidth = (W - (barCount - 1) * barSpacing) / barCount;
+
+        for (let i = 0; i < barCount; i++) {
+          const idx = Math.floor((i / barCount) * bufferLength);
+          const v = dataArray[idx] / 128.0;
+          const barHeight = Math.max(2, Math.pow(v - 1, 0.7) * H * 0.95);
+          const x = i * (barWidth + barSpacing) + 1;
+          const y = (H - barHeight) / 2;
+          const hue = 240 - (barHeight / H) * 20;
+          ctx.fillStyle = `hsl(${hue}, 80%, 55%)`;
+          ctx.beginPath();
+          const r = Math.min(4, barWidth / 2);
+          if (ctx.roundRect) {
+            ctx.roundRect(x, y, barWidth, barHeight, r);
+          } else {
+            ctx.fillRect(x, y, barWidth, barHeight);
+          }
+          ctx.fill();
+        }
+      }
+
+      draw();
+    }
+
+    function addVoiceMessage(audioUrl, sizeInBytes) {
+      const div = document.createElement('div');
+      div.className = 'msg-voice user';
+
+      const audio = document.createElement('audio');
+      audio.src = audioUrl;
+
+      const playBtn = document.createElement('button');
+      playBtn.className = 'play-btn';
+      playBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+      let isPlaying = false;
+
+      playBtn.addEventListener('click', () => {
+        if (isPlaying) {
+          audio.pause();
+          audio.currentTime = 0;
+          isPlaying = false;
+          playBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+        } else {
+          audio.play();
+          isPlaying = true;
+          playBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>';
+          audio.onended = () => {
+            isPlaying = false;
+            playBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>';
+          };
+        }
+      });
+
+      // Mini waveform SVG (static bars)
+      const waveSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      waveSvg.setAttribute('class', 'v-wave');
+      waveSvg.setAttribute('viewBox', '0 0 80 28');
+      waveSvg.setAttribute('preserveAspectRatio', 'none');
+      const bars = [4,8,12,18,22,16,10,6,5,9,14,20,16,8,4,7,11,16,22,18,12,6,3];
+      bars.forEach((h, i) => {
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('x', i * 3.5);
+        rect.setAttribute('y', (28 - h) / 2);
+        rect.setAttribute('width', '2.2');
+        rect.setAttribute('height', h);
+        rect.setAttribute('rx', '1.1');
+        rect.setAttribute('fill', '#4f46e5');
+        rect.setAttribute('opacity', 0.4 + (h / 22) * 0.6);
+        waveSvg.appendChild(rect);
+      });
+
+      const info = document.createElement('div');
+      info.className = 'voice-info';
+      const dur = document.createElement('span');
+      dur.className = 'v-dur';
+      dur.textContent = formatDuration(audio.duration || 0);
+      const sz = document.createElement('span');
+      sz.className = 'v-size';
+      sz.textContent = formatSize(sizeInBytes);
+      info.appendChild(dur);
+      info.appendChild(sz);
+
+      div.appendChild(playBtn);
+      div.appendChild(waveSvg);
+      div.appendChild(info);
+      chatMessages.appendChild(div);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      audio.onloadedmetadata = () => {
+        dur.textContent = formatDuration(audio.duration);
+      };
+    }
+
+    function formatDuration(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return `${m}:${s.toString().padStart(2, '0')}`;
+    }
+
+    function formatSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(1) + ' MB';
+    }
+
+    // --- Option button clicks ---
+    document.querySelectorAll('.option-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        openChat(btn.dataset.option);
+      });
+    });
+
+    // --- Back button ---
+    backBtn.addEventListener('click', goBack);
+
+    // --- Send events ---
+    sendBtn.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') sendMessage();
+    });
+
+    // --- Toggle voice/send based on input ---
+    chatInput.addEventListener('input', () => {
+      const hasText = chatInput.value.trim().length > 0;
+      voiceBtn.classList.toggle('hidden', hasText);
+      sendBtn.classList.toggle('visible', hasText);
+    });
+
+  });
+</script>
+</body>
+</html>
